@@ -24,8 +24,29 @@ class Parqueadero
 		Parqueadero();
 		bool parqueaderovacio();
 		bool parqueaderolleno();
-		
+	
+	/*	
+		void setArr(string Celdas)
+		{
+			arr[] = Celdas[];
+		}
+		void setHora(int Horas)
+		{
+			hora[] = Horas[];
+		}
+		string getArr()
+		{
+			return Celdas[];
+		}
+		int getHora()
+		{
+			return Horas[];
+		}
+		*/ // aca al tratar de hacer los set y get me da errores en el manejo de las variables al igualarlas la una con la otra	
 };
+
+
+
 
 Parqueadero::Parqueadero()
 {
@@ -67,7 +88,7 @@ void Parqueadero::parquear(string vehiculo, float hora)
 		cout << "Ingrese marca de vehiculo y modelo (sin espacios)"; cin >> vehiculo;
 		arr[tope] = vehiculo;
 		cout << "Ingrese la hora de entrada (hora militar)"; cin >> hora;
-		hora[tope] = hora;
+		//hora[tope] = hora; aca es setHora
 		cout << "\a";
 		cout << "¡Vehiculo parqueado correctamente!";
 		system("pause");
@@ -89,18 +110,18 @@ void Parqueadero::sacar(string vehiculo, float hora)
 		{
 			if(arr[i] == vehiculo)
 			{
-				arr[i] = NULL; //aca se asigna un vacio en donde estaba el carro, para que quede vacio
+				arr[i] = NULL; //aca se asigna un vacio en donde estaba el carro, para que quede vacio, da error, no se como solucionarlo
 				cout << "Ingrese la hora de salida de " << vehiculo; cin >> horasal;
-				horafin = hora[i] - horasal;
+				//horafin = hora[i] - horasal; aca es con un getHora
 				cobro = 0; 
 				a = i; //la a se iguala a i, para que a tenga el valor de i, osea la hora, y se pueda manejar la i abajo
 				//ciclo para calcular el precio del parqueo
-				for(i=hora[a]; i<=horafin; i = i + 1000)
+				/*for(i=hora[a]; i<=horafin; i = i + 1000)
 				{
 					cobro = cobro + 1000;
 				}
-				hora[a] = NULL; 
-				cout << "Lo que debe pagar es " << cobro << " vuelva pronto!";
+				hora[a] = NULL; //aca un setHora
+				cout << "Lo que debe pagar es " << cobro << " vuelva pronto!";*/ //para manejar el ciclo arriba se necesita un getHora
 			}
 			else
 			{
@@ -116,7 +137,7 @@ void Parqueadero::sacar(string vehiculo, float hora)
 	}
 }
 
-int Parqueadero::contarceldas(string arr[])
+int Parqueadero::contarceldas(string arr)
 {
 	int i, dispo = 0, ocup = 0;
 	
@@ -136,5 +157,7 @@ int Parqueadero::contarceldas(string arr[])
 	cout << "Hay " << ocup << "celdas ocupadas";
 	cout << "Hay " << dispo << "celdas disponibles";
 }
+
+
 
 
