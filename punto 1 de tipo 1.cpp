@@ -18,12 +18,13 @@ class Parqueadero
 		int hora[];
 	public:
 		void parquear(string, float);
-		float liquidar(float);
+		//float liquidar(float); no es necesaria, pues en la funcion parquear ya se añadio el cobro
 		void sacar(string, float);
 		int contarceldas(string);
 		Parqueadero();
 		bool parqueaderovacio();
 		bool parqueaderolleno();
+		
 };
 
 Parqueadero::Parqueadero()
@@ -113,6 +114,27 @@ void Parqueadero::sacar(string vehiculo, float hora)
 		cout << "\a";
 		cout << "No hay vehiculos, espere clientela"; 
 	}
+}
+
+int Parqueadero::contarceldas(string arr[])
+{
+	int i, dispo = 0, ocup = 0;
+	
+	//sencillamente en este ciclo, se van contando los espacios, si es NULL, se va contanto en ocup (ocupados) y si no en dispo (disponibles
+	for(i=0; i<19; i++)
+	{
+		if(arr[i] == NULL)
+		{
+			ocup++;
+		}
+		else
+		{
+			dispo++;
+		}
+	}
+	
+	cout << "Hay " << ocup << "celdas ocupadas";
+	cout << "Hay " << dispo << "celdas disponibles";
 }
 
 
