@@ -132,7 +132,7 @@ int Parqueadero::contarceldas(string arr[])
 			dispo++;
 		}
 	}
-	
+	cout << "\a";
 	cout << "Hay " << ocup << "celdas ocupadas";
 	cout << "Hay " << dispo << "celdas disponibles";
 }
