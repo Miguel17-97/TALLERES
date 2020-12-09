@@ -24,27 +24,32 @@ class Parqueadero
 		Parqueadero();
 		bool parqueaderovacio();
 		bool parqueaderolleno();
+		void setArr(string*, int);
+		void setHora(int*, int);
+		string getArr(int);
+		int getHora(int);
 	
-	/*	
-		void setArr(string Celdas)
-		{
-			arr[] = Celdas[];
-		}
-		void setHora(int Horas)
-		{
-			hora[] = Horas[];
-		}
-		string getArr()
-		{
-			return Celdas[];
-		}
-		int getHora()
-		{
-			return Horas[];
-		}
-		*/ // aca al tratar de hacer los set y get me da errores en el manejo de las variables al igualarlas la una con la otra	
 };
 
+void Parqueadero::setArr(string carrosen[], int i)
+{
+	arr[i] = carrosen[i];
+}
+
+void Parqueadero::setHora(int horasen[], int i)
+{
+	hora[i] = horasen[i];
+}
+
+string Parqueadero::getArr(int i)
+{
+	return arr[i];
+}
+
+int Parqueadero::getHora(int i)
+{
+	return hora[i];
+}
 
 
 
