@@ -19,7 +19,7 @@ class Parqueadero
 	public:
 		void parquear(string, float);
 		void sacar(float);
-		void contarceldas(string);
+		void contarceldas();
 		Parqueadero();
 		bool parqueaderovacio();
 		bool parqueaderolleno();
@@ -86,6 +86,7 @@ bool Parqueadero::parqueaderolleno()
 
 void Parqueadero::parquear(string vehiculo, float horas)
 {
+	cout << "Parqueando";
 	if(parqueaderolleno()==false)
 	{
 		tope++;
@@ -98,7 +99,7 @@ void Parqueadero::parquear(string vehiculo, float horas)
 	else
 	{
 		cout << "\a";
-		cout << "No se puede parquear, no hay celdas :(";
+		cout << "No se puede parquear, no hay celdas ";
 		system("pause");
 	}
 }
@@ -134,14 +135,16 @@ void Parqueadero::sacar(float horasal)
 	}
 }
 
-void Parqueadero::contarceldas(string arr)
+void Parqueadero::contarceldas()
 {
 	int i, dispo = 0, ocup = 0;
+	
+	cout << "entrando a contar celdas";
 	
 	//sencillamente en este ciclo, se van contando los espacios, si es NULL, se va contanto en ocup (ocupados) y si no en dispo (disponibles
 	for(i=0; i<limit; i++)
 	{
-		if(arr[i] != '\0')
+		if(arr[i] != "\0")
 		{
 			ocup++;
 		}
@@ -164,6 +167,7 @@ int main()
 	bool ctrl = true;
 	string vehiculo;
 	float hora, horasal;
+	Parqueadero carro = Parqueadero();
 	do
 	{
 		cout << "\a";
@@ -182,29 +186,27 @@ int main()
 		
 		switch(opc)
 		{
-			case 1: system("cls");
-					cout << "Ingrese el vehiculo a parquear: "; cin >> vehiculo;
+			case 1: 
+					cout << "Ingrese el vehiculo a parquear: "; cin >> vehiculo; fflush(stdin);
 					cout << "\n";
-					cout << "Ingrese la hora a la que entro: "; cin >> hora;
-					Parqueadero carro = Parqueadero();
+					cout << "Ingrese la hora a la que entro: "; cin >> hora; fflush(stdin);
 					carro.parquear(vehiculo, hora);
-					system("pause");
-					system("cls");
+					
 					break;	
-			/*case 2: system("cls");
-					cout << "Ingrese la hora de salida: "; cin >> horasal;
+			case 2: 
+					cout << "Ingrese la hora de salida: "; cin >> horasal; fflush(stdin);
 					carro.sacar(horasal);
 					system("pause");
 					system("cls");
 					break;
-			case 3: system("cls");
-					carro.contarceldas();		//el error da cuando se hacen los case 2,3,4. la razon no se cual es...
+			case 3: 
+					carro.contarceldas();		
 					system("pause");
 					system("cls");
 					break;
-			case 4: system("cls");
+			case 4: 
 					ctrl = false;
-					EXIT_SUCCESS;*/
+					EXIT_SUCCESS;
 		}
 	}while(ctrl==true);
 	
