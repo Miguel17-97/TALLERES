@@ -15,23 +15,22 @@ class Parqueadero
 		int tope;
 		int limit;
 		string arr[];
-		int hora[];
+		float hora[];
 	public:
 		void parquear(string, float);
-		//float liquidar(float); no es necesaria, pues en la funcion parquear ya se añadio el cobro
-		void sacar(string, float);
-		int contarceldas(string);
+		void sacar(float);
+		void contarceldas(string);
 		Parqueadero();
 		bool parqueaderovacio();
 		bool parqueaderolleno();
-		void setArr(string*, int);
+		/*void setArr(string*, int);
 		void setHora(int*, int);
 		string getArr(int);
-		int getHora(int);
+		int getHora(int);*/
 	
 };
 
-void Parqueadero::setArr(string carrosen[], int i)
+/*void Parqueadero::setArr(string carrosen[], int i)
 {
 	arr[i] = carrosen[i];
 }
@@ -50,7 +49,7 @@ int Parqueadero::getHora(int i)
 {
 	return hora[i];
 }
-
+*/
 
 
 Parqueadero::Parqueadero()
@@ -85,15 +84,13 @@ bool Parqueadero::parqueaderolleno()
 	}
 }
 
-void Parqueadero::parquear(string vehiculo, float hora)
+void Parqueadero::parquear(string vehiculo, float horas)
 {
 	if(parqueaderolleno()==false)
 	{
 		tope++;
-		cout << "Ingrese marca de vehiculo y modelo (sin espacios)"; cin >> vehiculo;
 		arr[tope] = vehiculo;
-		cout << "Ingrese la hora de entrada (hora militar)"; cin >> hora;
-		//hora[tope] = hora; aca es setHora
+		hora[tope] = horas;
 		cout << "\a";
 		cout << "¡Vehiculo parqueado correctamente!";
 		system("pause");
@@ -106,34 +103,28 @@ void Parqueadero::parquear(string vehiculo, float hora)
 	}
 }
 
-void Parqueadero::sacar(string vehiculo, float hora)
+void Parqueadero::sacar(float horasal)
 {
-	int i, horasal, horafin, cobro, a;
+	int horafin, var=tope;
+	string p;
+	float horas;
+	
 	if(parqueaderovacio()==false)
 	{
-		for(i=tope; i>=0; i--)
+		p = arr[var];
+		horas = hora[var];
+		
+		while(var>=0)
 		{
-			if(arr[i] == vehiculo)
-			{
-				arr[i] = NULL; //aca se asigna un vacio en donde estaba el carro, para que quede vacio, da error, no se como solucionarlo
-				cout << "Ingrese la hora de salida de " << vehiculo; cin >> horasal;
-				//horafin = hora[i] - horasal; aca es con un getHora
-				cobro = 0; 
-				a = i; //la a se iguala a i, para que a tenga el valor de i, osea la hora, y se pueda manejar la i abajo
-				//ciclo para calcular el precio del parqueo
-				/*for(i=hora[a]; i<=horafin; i = i + 1000)
-				{
-					cobro = cobro + 1000;
-				}
-				hora[a] = NULL; //aca un setHora
-				cout << "Lo que debe pagar es " << cobro << " vuelva pronto!";*/ //para manejar el ciclo arriba se necesita un getHora
-			}
-			else
-			{
-				cout << "\a";
-				cout << "Ese vehiculo no ha entrado";
-			}
+			arr[var] = arr[var-1];
+			hora[var] = hora[var-1];
+			var--;
 		}
+		tope--;
+		horafin = horasal - horas;
+		horafin = horafin*1500;
+		cout << "Su liquidacion es de: " << horafin;
+			
 	}
 	else
 	{
@@ -142,14 +133,14 @@ void Parqueadero::sacar(string vehiculo, float hora)
 	}
 }
 
-int Parqueadero::contarceldas(string arr)
+void Parqueadero::contarceldas(string arr)
 {
 	int i, dispo = 0, ocup = 0;
 	
 	//sencillamente en este ciclo, se van contando los espacios, si es NULL, se va contanto en ocup (ocupados) y si no en dispo (disponibles
-	for(i=0; i<19; i++)
+	for(i=0; i<limit; i++)
 	{
-		if(arr[i] == NULL)
+		if(arr[i] != '\0')
 		{
 			ocup++;
 		}
@@ -163,6 +154,7 @@ int Parqueadero::contarceldas(string arr)
 	cout << "Hay " << dispo << "celdas disponibles";
 }
 
-
+//Parqueadero carro = Parqueadero ();  pa hacer un carrito
+//carro.parquear(); para hacer en el main
 
 
