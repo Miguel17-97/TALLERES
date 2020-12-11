@@ -111,6 +111,7 @@ void Parqueadero::sacar(float horasal)
 	
 	if(parqueaderovacio()==false)
 	{
+		
 		p = arr[var];
 		horas = hora[var];
 		
@@ -124,7 +125,7 @@ void Parqueadero::sacar(float horasal)
 		horafin = horasal - horas;
 		horafin = horafin*1500;
 		cout << "Su liquidacion es de: " << horafin;
-			
+	
 	}
 	else
 	{
@@ -156,5 +157,59 @@ void Parqueadero::contarceldas(string arr)
 
 //Parqueadero carro = Parqueadero ();  pa hacer un carrito
 //carro.parquear(); para hacer en el main
+
+int main()
+{
+	short opc;
+	bool ctrl = true;
+	string vehiculo;
+	float hora, horasal;
+	do
+	{
+		cout << "\a";
+		cout << "***********MENU************" << endl;
+		cout << "|(1) Para parquear         |" << endl;
+		cout << "|(2) Para sacar un vehiculo|" << endl;
+		cout << "|(3) Para contar celdas    |" << endl;
+		cout << "|(4) Acabar jornada        |" << endl;
+		cout << "****************************" << endl;
+		cout << "Elija una opcion: "; cin >> opc;
+		while((opc < 1) || (opc > 4))
+		{
+			cout << "\a";
+			cout << "Opcion no valida, intente otra vez: "; cin >> opc;
+		}
+		
+		switch(opc)
+		{
+			case 1: system("cls");
+					cout << "Ingrese el vehiculo a parquear: "; cin >> vehiculo;
+					cout << "\n";
+					cout << "Ingrese la hora a la que entro: "; cin >> hora;
+					Parqueadero carro = Parqueadero();
+					carro.parquear(vehiculo, hora);
+					system("pause");
+					system("cls");
+					break;	
+			/*case 2: system("cls");
+					cout << "Ingrese la hora de salida: "; cin >> horasal;
+					carro.sacar(horasal);
+					system("pause");
+					system("cls");
+					break;
+			case 3: system("cls");
+					carro.contarceldas();		//el error da cuando se hacen los case 2,3,4. la razon no se cual es...
+					system("pause");
+					system("cls");
+					break;
+			case 4: system("cls");
+					ctrl = false;
+					EXIT_SUCCESS;*/
+		}
+	}while(ctrl==true);
+	
+	return 0;
+	
+}
 
 
