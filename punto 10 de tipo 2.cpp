@@ -25,7 +25,7 @@ class Cola
 		
 	public:
 		Cola(int); // constructor de la clase
-		~Cola () {cout << "Destruyendo programa.";}
+		~Cola () {cout << "\n\n\nDestruyendo programa.\n\n\n";}
 		void encolar (int);
 		int desencolar ();
 		bool colallena ();
@@ -72,8 +72,9 @@ void Cola :: encolar (int info)
 	{
 		tope ++;
 		vect [tope] = info;
-		cout << "\tDato insertado\t" << endl;
+		cout << "\n\t Dato insertado\t" << endl;
 	}
+	
 	else
 	{
 		cout << "\t Cola llena, no se puede insertar.\t";
@@ -86,7 +87,7 @@ int Cola :: desencolar ()
 	
 	if (colavacia () == false)
 	{
-		p = vect [i];
+		p = vect [i]; // 
 		
 		while (i <= tope)
 		{
@@ -96,44 +97,55 @@ int Cola :: desencolar ()
 		
 		tope--;
 	}
+	else
+	{
+		cout << "No hay datos para sacar.";
+	}
 	
 	return p;
 }
 
 void Cola :: mostrarcola ()
 {
-	int desencolando = 0;
+	int desencolando_uno = 0, desencolando_dos = 0;
 	Cola nueva = Cola (tam);
 	
 	if (colavacia() == true)
 	{
-		cout << "La cola está vacia, no hay elementos para mostrar.";
+		cout << "\tLa cola está vacia, no hay elementos para mostrar.\t\n";
 	}
 	else
 	{
-		while (colavacia() == false && nueva.colallena() == false)
+		while (colavacia() == false)
 		{
-			desencolando = desencolar();
-			cout << "|" << desencolando << "|" << " -> ";
-			nueva.encolar(desencolando);
+			desencolando_uno = desencolar();
+			cout << "\t     |"<< desencolando_uno <<"|\t";
+			nueva.encolar(desencolando_uno);
 		}
 		
-		// Regresamos los datos a la cola original
+		cout << "\tRegresando datos a la pila normal.\n";// Regresamos los datos a la cola original
 		
-		while (colallena() == false && nueva.colavacia() == false)
+		while (colallena() == false)
 		{
-			desencolando = nueva.desencolar();
-			encolar(desencolando);
+			desencolando_dos = nueva.desencolar();
+			encolar(desencolando_dos);
 		}
 	}
 }
 
 int Cola :: numeroAleatorio ()
 {
-	return 100 + rand() % 400;
+	
 }
 
 // Cambiar la funcion numero aleatorio para el main y no en la clase Cola....
+
+int numeroAleatorio(int a, int b)
+{
+	return a + (rand() % b);
+} // PARAMETRIZACIÓN
+
+int numeroAleatorio(int, int);
 
 main ()
 {
@@ -144,40 +156,53 @@ main ()
 	cin >> tam;
 	Cola aleatoria = Cola (tam);
 	Cola normal = Cola (tam);
-	srand((unsigned)time(0));
+	srand((unsigned)time(0)); // Serie especifica de numeros aleatorios
 	
-	for (j = 0; j < tam; j++)
+	while (aleatoria.colallena() == false)
 	{
-		aleatoria.encolar(aleatoria.numeroAleatorio());
-		rand = aleatoria.numeroAleatorio();
-		cout << rand << endl;
+		rand = numeroAleatorio (100,500);
+		aleatoria.encolar(rand);
+		cout << "\t     |"<< rand <<"|\t";
 	}
+	
+	cout << "\n\n";
 	
 	do
 	{
+		cout << "\n";
 		cout << "\t********** MENU **********\t\n";
 		cout << "\t(1). Encolar desde la cola aleatoria\t\n";
 		cout << "\t(2). Desencolar el dato aleatorio\t\n";
 		cout << "\t(3). Mostrar cola normal\t\n";
 		cout << "\t(4). Salir\t\n";
-		cin >> opcion;
+		cout << "\t opcion: ";
+		cin >> opcion; cout << "\n";
+		
+		while ((opcion < 1) or (opcion>4))
+		{
+			cout << "\t Opcion incorrecta, inserte de nuevo una opcion valida: ";
+			cin >> opcion;
+		}
+		
 		switch (opcion)
 		{
-			case 1: cout << "\n Trayendo datos... " << endl;
+			case 1: cout << "\tTrayendo datos... " << endl;
 					normal.encolar(aleatoria.desencolar());
+					system ("pause");
+					system ("cls");
 			break;
 			
-			case 2: cout << "\n Desencolando... " << endl;
+			case 2: cout << "\tDesencolando... " << endl;
 					normal.desencolar();
+					system ("pause");
+					system ("cls");
 			break;
 		
-			case 3: cout << "\n Mostrando cola..." << endl;
+			case 3: cout << "\tMostrando cola..." << endl;
 					normal.mostrarcola();
-			break;
-			
-			default: cout << "\t---------- opcion no valida ----------\t";
-			break;
-						
+					system ("pause");
+					system ("cls");
+			break;						
 	    }
 	}while (opcion < 4);
 		
